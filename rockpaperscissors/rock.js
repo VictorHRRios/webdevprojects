@@ -1,69 +1,53 @@
-var humanScore = 0;
-var computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 
-function getHumanChoice(){
-    return String(prompt("Please enter your decision: ")).toUpperCase();
+function playRound(humanChoice, computerChoice) {
+    if ((humanChoice == "ROCK" && computerChoice == "SCISSORS") ||
+        (humanChoice == "PAPER" && computerChoice == "ROCK") || 
+        (humanChoice == "SCISSORS" && computerChoice == "PAPER")) {
+            console.log(`You Win!\n Your choice: ${humanChoice}\n Computer Choice: ${computerChoice}`)
+            humanScore++    
+        } else {
+            computerScore++
+            console.log(`You Lose!\n Your choice: ${humanChoice}\n Computer Choice: ${computerChoice}`)
+        }
 }
-function getComputerChoice(){
-    if (Math.random() < 0.33) {
+
+const getHumanChoice = () => {
+        let userInput;
+        do  {
+            userInput = prompt("Please enter your decision: ").toUpperCase();
+        } while (userInput !== "ROCK" && userInput !== "PAPER" && userInput !== "SCISSORS");
+        return userInput;
+}
+
+const getComputerChoice = () => {
+    let computerInput = Math.random();
+    if (computerInput < 0.33) {
         return "ROCK";
-    } else if (0.66 >Math.random() >= 0.33) {
+    } else if (computerInput < 0.66) {
         return "PAPER";
     } else {
         return "SCISSORS";
     }
 }
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice == computerChoice) {
-        console.log("Draw!")
-        return
-    }
-    switch (humanChoice) {
-        case "ROCK":
-            if (computerChoice == "PAPER") {
-                computerScore++
-                console.log("You Lose!")
-            } else {
-                console.log("You Win!")
-                humanScore++    
-            }
-            break;
-        case "PAPER":
-            if (computerChoice == "SCISSORS") {
-                computerScore++
-                console.log("You Lose!")
-            } else {
-                console.log("You Win!")
-                humanScore++          
-            }
-            break;
-        case "SCISSORS":
-            if (computerChoice == "ROCK") {
-                computerScore++
-                console.log("You Lose!")
-            } else {
-                console.log("You Win!")
-                humanScore++              
-            }
-            break;
-        default:
-            console.log("Incorrect Value")
-            break;
-    }
-}
-
-
 function playGame() {
     for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice(); 
+        let humanSelection;
+        let computerSelection;
+        do {
+            humanSelection = getHumanChoice();
+            computerSelection = getComputerChoice();
+            if (humanSelection === computerSelection) {
+                console.log(`Draw!\n Your choice: ${humanSelection}\n Computer Choice: ${computerSelection}`)
+            }
+        } while (humanSelection === computerSelection);
         playRound(humanSelection, computerSelection);
+        console.log(`Human ${humanScore} vs Computer ${computerScore}`)
     }
 }
 
 playGame()
-console.log(humanScore)
-console.log(computerScore)
 
