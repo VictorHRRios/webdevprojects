@@ -34,20 +34,26 @@ const getComputerChoice = () => {
 }
 
 function playGame() {
-    for (let i = 0; i < 5; i++) {
-        let humanSelection;
-        let computerSelection;
-        do {
-            humanSelection = getHumanChoice();
-            computerSelection = getComputerChoice();
-            if (humanSelection === computerSelection) {
-                console.log(`Draw!\n Your choice: ${humanSelection}\n Computer Choice: ${computerSelection}`)
-            }
-        } while (humanSelection === computerSelection);
-        playRound(humanSelection, computerSelection);
-        console.log(`Human ${humanScore} vs Computer ${computerScore}`)
-    }
+    //for (let i = 0; i < 5; i++) {
+    let humanSelection;
+    let computerSelection;
+    do {
+        humanSelection = getHumanChoice();
+        computerSelection = getComputerChoice();
+        if (humanSelection === computerSelection) {
+            console.log(`Draw!\n Your choice: ${humanSelection}\n Computer Choice: ${computerSelection}`)
+        }
+    } while (humanSelection === computerSelection);
+    playRound(humanSelection, computerSelection);
+    console.log(`Human ${humanScore} vs Computer ${computerScore}`)
+    //}
 }
 
-playGame()
+const ROCK = document.querySelector(".rock");
+const PAPER = document.querySelector(".paper");
+const SCISSORS = document.querySelector(".scissor");
+
+ROCK.addEventListener("click", playRound("ROCK"));
+PAPER.addEventListener("click", playRound("PAPER"));
+SCISSORS.addEventListener("click", playRound("ROCK"));
 
