@@ -12,22 +12,20 @@ function playRound(humanChoice, computerChoice) {
         result.textContent =  `Draw!\r\n Your choice: ${humanChoice}, is the same to ${computerChoice}`
         score.textContent =  `Human: ${humanScore} vs Computer: ${computerScore}`
         return;
-    }
-    if ((humanChoice == "ROCK" && computerChoice == "SCISSORS") ||
+    } else if((humanChoice == "ROCK" && computerChoice == "SCISSORS") ||
         (humanChoice == "PAPER" && computerChoice == "ROCK") || 
         (humanChoice == "SCISSORS" && computerChoice == "PAPER")) {
             result.textContent =  `You Win!\r\n ${humanChoice} beats ${computerChoice}`
             humanScore++;
-        } else {
-            computerScore++;
-            result.textContent =  `You Lose!\r\n ${humanChoice} beats ${computerChoice}`
-        }
+    } else {
+        computerScore++;
+        result.textContent =  `You Lose!\r\n ${computerChoice} beats ${humanChoice}`
+    }
     score.textContent =  `Human: ${humanScore} vs Computer: ${computerScore}`
 }
 
 function checkScore() {
     if (humanScore < 5 && computerScore < 5) {
-        console.log(`Human ${humanScore} vs Computer ${computerScore}`)
         return true;
     } else {
         if ( humanScore > computerScore) {
@@ -50,7 +48,6 @@ const getComputerChoice = () => {
     }
 }
 
-
 ROCK.addEventListener("click", () => {
     if (!checkScore()) {
         return;
@@ -72,7 +69,15 @@ SCISSORS.addEventListener("click", () => {
     playRound("SCISSORS", getComputerChoice())
 });
 
-
+const reset_button = document.createElement("button");
+reset_button.textContent = "Play Again";
+reset_button.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0;
+    score.textContent = "waiting...";
+    result.textContent = "";
+});
+document.body.appendChild(reset_button);
 
 
 

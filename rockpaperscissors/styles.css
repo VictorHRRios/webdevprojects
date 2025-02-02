@@ -29,6 +29,11 @@ body {
     cursor:pointer;
 }
 
+.selection img:hover {
+    opacity: .25;
+}
+
+
 .score {
     font-size: 30px;
 }
