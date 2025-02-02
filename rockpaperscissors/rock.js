@@ -49,11 +49,19 @@ function playGame() {
     //}
 }
 
-const ROCK = document.querySelector(".rock");
-const PAPER = document.querySelector(".paper");
-const SCISSORS = document.querySelector(".scissor");
+const ROCK = document.querySelector("img.rock");
+const PAPER = document.querySelector("img.paper");
+const SCISSORS = document.querySelector("img.scissor");
 
-ROCK.addEventListener("click", playRound("ROCK"));
-PAPER.addEventListener("click", playRound("PAPER"));
-SCISSORS.addEventListener("click", playRound("ROCK"));
+ROCK.addEventListener("click", () => {
+    playRound("ROCK", getComputerChoice())
+});
+ROCK.addEventListener("hover", () => {});
+
+PAPER.addEventListener("click", () => {
+    playRound("PAPER", getComputerChoice())
+});
+SCISSORS.addEventListener("click", () => {
+    playRound("SCISSORS", getComputerChoice())
+});
 
