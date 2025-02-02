@@ -1,25 +1,22 @@
 let humanScore = 0;
 let computerScore = 0;
 
-
 function playRound(humanChoice, computerChoice) {
+    const result = document.querySelector(".results");
+    result.setAttribute("style", "font-size: 30px");
+    if (humanChoice == computerChoice) {
+        result.textContent =  `Draw!\r\n ${humanChoice} is equal ${computerChoice}`
+        return;
+    }
     if ((humanChoice == "ROCK" && computerChoice == "SCISSORS") ||
         (humanChoice == "PAPER" && computerChoice == "ROCK") || 
         (humanChoice == "SCISSORS" && computerChoice == "PAPER")) {
-            console.log(`You Win!\n Your choice: ${humanChoice}\n Computer Choice: ${computerChoice}`)
+            result.textContent =  `You Win!\r\n ${humanChoice} beats ${computerChoice}`
             humanScore++    
         } else {
             computerScore++
-            console.log(`You Lose!\n Your choice: ${humanChoice}\n Computer Choice: ${computerChoice}`)
+            result.textContent =  `You Lose!\r\n ${humanChoice} beats ${computerChoice}`
         }
-}
-
-const getHumanChoice = () => {
-        let userInput;
-        do  {
-            userInput = prompt("Please enter your decision: ").toUpperCase();
-        } while (userInput !== "ROCK" && userInput !== "PAPER" && userInput !== "SCISSORS");
-        return userInput;
 }
 
 const getComputerChoice = () => {
@@ -33,25 +30,12 @@ const getComputerChoice = () => {
     }
 }
 
-function playGame() {
-    //for (let i = 0; i < 5; i++) {
-    let humanSelection;
-    let computerSelection;
-    do {
-        humanSelection = getHumanChoice();
-        computerSelection = getComputerChoice();
-        if (humanSelection === computerSelection) {
-            console.log(`Draw!\n Your choice: ${humanSelection}\n Computer Choice: ${computerSelection}`)
-        }
-    } while (humanSelection === computerSelection);
-    playRound(humanSelection, computerSelection);
-    console.log(`Human ${humanScore} vs Computer ${computerScore}`)
-    //}
-}
-
 const ROCK = document.querySelector("img.rock");
 const PAPER = document.querySelector("img.paper");
 const SCISSORS = document.querySelector("img.scissor");
+
+
+console.log(`Human ${humanScore} vs Computer ${computerScore}`)
 
 ROCK.addEventListener("click", () => {
     playRound("ROCK", getComputerChoice())

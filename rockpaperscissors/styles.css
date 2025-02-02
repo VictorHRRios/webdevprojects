@@ -11,6 +11,7 @@ body {
 }
 
 .main {
+    flex-direction: column;
     flex: 1;
     display: flex;
     justify-content: space-evenly;
@@ -26,4 +27,8 @@ body {
 
 .selection img {
     cursor:pointer;
+}
+
+.results p {
+    font-size: 30px;
 }
