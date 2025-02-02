@@ -29,6 +29,10 @@ body {
     cursor:pointer;
 }
 
-.results p {
+.score {
+    font-size: 30px;
+}
+
+.result {
     font-size: 30px;
 }
