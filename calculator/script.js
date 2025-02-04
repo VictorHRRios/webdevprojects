@@ -59,10 +59,17 @@ inputNumber.forEach((input) => {
 
 inputOperand.forEach((input) => {
     input.addEventListener("click", () => {
-        operand = input.id;
-        console.log(operand);
+        if (operand === '') {
+            operand = input.id;
+        } else {
+            leftNumber = operate(operand, leftNumber, rightNumber);
+            display.textContent = leftNumber;
+            operand = input.id;
+            rightNumber = '';
+        }
     })
 });
+
 
 result.addEventListener("click", () => {
     leftNumber = operate(operand, leftNumber, rightNumber);
