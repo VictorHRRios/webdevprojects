@@ -29,4 +29,4 @@ const operate = (op, num1, num2) => {
     }
 }
 
-console.log(operate('-', 1, 3));
+const numbers = document.querySelectorAll("button.class")

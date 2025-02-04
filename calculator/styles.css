@@ -15,5 +15,54 @@ body {
 
 .main {
     display: flex;
+    justify-content: center;
     flex: 1;
+}
+
+button {
+    width: 80px;
+    height: 80px;
+}
+
+.calculator {
+    width: 400px;
+    height: 600px;
+    padding: 20px ;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+}
+
+
+
+.operands,
+.numbers,
+.special {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+}
+.numbers button {
+    flex: 0 0 25%;
+}
+
+.operands button {
+    flex: 0 0 25%;
+}
+
+.special button {
+    flex: 0 0 50%;
+}
+
+
+.display {
+    border-style: solid;
+    padding: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content:space-evenly;
 }
