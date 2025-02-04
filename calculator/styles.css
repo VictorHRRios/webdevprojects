@@ -4,6 +4,7 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color:honeydew;
 }
 
 .header {
@@ -31,6 +32,10 @@ button {
     display: flex;
     flex-direction: column;
     border-style: solid;
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: darkslategray;
+    background-color:seashell;
 }
 
 
@@ -57,7 +62,9 @@ button {
 
 .display {
     border-style: solid;
+    border-radius: 30px;
     padding: 20px;
+    background-color:lightsteelblue;
 }
 
 .buttons {

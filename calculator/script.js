@@ -4,13 +4,13 @@ let operand = "";
 const operators = ['+', '-', '*', '/'];
 const display = document.querySelector("div.display");
 
-const add = (num1, num2) => (num1 + num2);
-const substract = (num1, num2) => (num1 - num2);
-const multiply = (num1, num2) => (num1 * num2);
-const divide = (num1, num2) => (num1 / num2);
+const add = (num1, num2) => (+num1 + +num2);
+const substract = (num1, num2) => (+num1 - +num2);
+const multiply = (num1, num2) => (+num1 * +num2);
+const divide = (num1, num2) => (+num1 / +num2);
 
 const addNumber  = (button) => {
-    if (leftNumber === "") {
+    if (leftNumber === "" ) {
         display.textContent = '';
         display.textContent += button;
         leftNumber = button;
@@ -63,6 +63,13 @@ inputOperand.forEach((input) => {
         console.log(operand);
     })
 });
+
+result.addEventListener("click", () => {
+    leftNumber = operate(operand, leftNumber, rightNumber);
+    operand = '';
+    rightNumber = '';
+    display.textContent = leftNumber;
+})
 
 clear.addEventListener("click", () => {
     leftNumber = '';
