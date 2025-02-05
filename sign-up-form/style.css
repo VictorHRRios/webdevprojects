@@ -1,0 +1,119 @@
+body {
+    display: flex;
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
+
+button {
+    background-color: rgb(62, 80, 56);
+    border-style: none;
+    border-radius: 5px;
+    padding: .5rem 6rem .5rem 6rem;
+}
+
+a:link {
+    color: rgb(15, 31, 10);
+}
+a:visited {
+    text-decoration: none;
+    color: rgb(15, 31, 10);
+}
+
+
+@font-face {
+    font-family: cool-font;
+    src: url(./BiteChocolate-2RGl.ttf);
+  }
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    position: relative;
+}
+
+.website-info {
+    padding: 5rem 1rem 1rem 1rem;
+    font-size: .8rem;
+}
+
+.form-area {
+    padding: 1rem;
+    font-size: .8rem;
+    background-color: white;
+    box-shadow: 2px 6px 2px -2px rgba(0, 0, 0, 0.2); 
+}
+
+div.bottom {
+    padding: 1rem;
+}
+
+form.fill-form {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: .8rem;
+    font-weight: 600;
+    gap:20px;
+}
+
+
+.left-side > div.area-behind-logo {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    top: 6rem;
+    width: 100%;
+}
+
+.left-side > div.credits {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    font-size: .8rem;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    background-color:hsl(214, 64%, 98%);
+}
+
+h1.company-name {
+    font-family: cool-font, sans-serif;
+    font-size: 30px;
+    padding-top: 1rem;
+}
+
+.card-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+input {
+    border: 2px solid rgb(0, 140, 255);
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 5px;
+}
+  
+input:invalid {
+    border-color: red;
+}
+  
+input:valid {
+    border-color: rgba(0, 0, 0, 0.192);
+    border-width: 2px;
+}
+
+
