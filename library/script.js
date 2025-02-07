@@ -11,11 +11,12 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new_book);
 }
 
-addBookToLibrary("first", "some", "123", "have read");
-addBookToLibrary("second", "someone", "153", "have not read");
-addBookToLibrary("third", "someoneone", "323", "have read");
+addBookToLibrary("El principito", "some", "123", "have read");
+addBookToLibrary("Harry Potter", "someone", "153", "have not read");
+addBookToLibrary("Crepusculo", "someoneone", "323", "have read");
 
 function displayLibrary() {
+    container.textContent = "";
     for (book of myLibrary) {
         const book_div = document.createElement("div");
         const title = document.createElement("div");
@@ -35,5 +36,30 @@ function displayLibrary() {
 }
 
 const container = document.querySelector("div.container");
+
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("dialog + button");
+const closeButton = document.querySelector("button.cancel");
+
+const book_title = document.querySelector('#book-title');
+const book_author = document.querySelector('#book-author');
+const book_pages = document.querySelector('#book-pages');
+const book_have_read = document.querySelector('#book-have-read');
+const acceptButton = document.querySelector("input.accept");
+
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});
+
+acceptButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    addBookToLibrary(book_title.value, book_author.value, book_pages.value, book_have_read.value);
+    dialog.close()
+    displayLibrary();
+});
 
 displayLibrary();
