@@ -175,6 +175,20 @@ svg {
     grid-template-rows: repeat(4, 1fr);
 }
 
+.icons {
+    justify-self: end;
+}
+
+.projects > .card {
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+    padding: 1rem;
+}
+
+.card svg {
+    fill: black;
+}
+
 .announcements > .card {
     border: 0;
     background-color: white;
@@ -184,7 +198,7 @@ svg {
     gap: 5px;
 }
 
-.card div {
+.announcements > .card div {
     border-style: solid;
     border-top: 0;
     border-left: 0;
