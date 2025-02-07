@@ -19,6 +19,7 @@ ul, li {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 .sidebar a {
@@ -76,6 +77,10 @@ input#search-bar {
     width: 70%;
 }
 
+.search-bar {
+    padding: 2rem;
+}
+
 .message {
     display: grid;
     grid-template-columns: 1fr 5fr;
@@ -84,9 +89,9 @@ input#search-bar {
 }
 
 .profile {
-    align-self: center;
+    padding: 2rem;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
 }
 
 .profile-name {
@@ -110,6 +115,8 @@ button {
     border: 0;
     border-radius: 1rem;
     font-size: 1rem;
+    width: 10rem;
+    height: 3rem;
     font-weight: 600;
     color: white;
 }
@@ -117,6 +124,10 @@ button {
 .title {
     font-weight: 600;
     font-size: 1.6rem;
+}
+.text {
+    color: rgb(71, 71, 71);
+    overflow: hidden;
 }
 
 .main-content {
@@ -147,13 +158,21 @@ svg {
     width: 2.5rem;
 }
 
-.header svg {
+.trending > div > svg {
+    width: 5rem;
+    align-self: center;
     fill: black;
-    padding: 1.3rem 1rem 0 1rem;
+}
+
+.header svg {
+    width: 2rem;
+    fill: black;
 }
 
 .message > svg {
-    width: 3rem;
+    fill: black;
+    padding-left: 1rem;
+    width: 6rem;
     grid-row: 1 / span 2;
 }
 
@@ -171,6 +190,8 @@ svg {
 
 
 .trending {
+    padding: 1rem;
+    background-color: white;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
 }
@@ -194,22 +215,32 @@ svg {
     background-color: white;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    min-height: 100%;
-    gap: 5px;
+    padding: 1rem;
 }
 
-.announcements > .card div {
+.announcements > .card > div {
     border-style: solid;
     border-top: 0;
     border-left: 0;
     border-right: 0;
     border-color: black;
+    padding: 1rem 0 1rem 0;
 }
 
-.trending > .card {
-    border: 0;
-    background-color: white;
+.announcements div:last-child {
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.trending div {
     display: grid;
-    grid-row: 1 / span 4;
-    min-height: 100%;
+    grid-template-columns: 1fr 3fr;
+}
+
+.trending a{
+    align-self: center;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
