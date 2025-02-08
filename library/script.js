@@ -33,10 +33,10 @@ function displayLibrary() {
         const readStatus = document.createElement("button");
         const divButtons = document.createElement("div");
 
-        title.textContent = book.title;
-        author.textContent = book.author;
-        pages.textContent = book.pages;
-        read.textContent = book.read ? "read" : "not read";
+        title.textContent = `Title: ${book.title}`;
+        author.textContent = `Author: ${book.author}`;
+        pages.textContent = `Pages: ${book.pages}`;
+        read.textContent = `${book.read ? "Read" : "Not Read"}`;
         deleteButton.textContent = "Delete";
         readStatus.textContent = "Have read?";
 
@@ -57,7 +57,7 @@ function displayLibrary() {
         });
         readStatus.addEventListener("click", () => {
             book.changeReadStatus();
-            read.textContent = book.read ? "read" : "not read";
+            read.textContent = book.read ? "Read" : "Not Read";
         });
         container.appendChild(bookDiv);
     }
