@@ -7,16 +7,14 @@ function Book(title, author, pages, read) {
 }
 
 Book.prototype.changeReadStatus = function() {
-    if (this.read === "read") {
-        this.read = "not read";
-    } else {
-        this.read = "read";
-    };
+    this.read ? this.read = false : this.read = true; 
 }
 
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
+    displayLibrary();
 }
+
 
 addBookToLibrary("El principito", "some", "123", "read");
 addBookToLibrary("Harry Potter", "someone", "153", "not read");
@@ -34,12 +32,14 @@ function displayLibrary() {
         const deleteButton = document.createElement("button");
         const readStatus = document.createElement("button");
         const divButtons = document.createElement("div");
+
         title.textContent = book.title;
         author.textContent = book.author;
         pages.textContent = book.pages;
-        read.textContent = book.read;
+        read.textContent = book.read ? "read" : "not read";
         deleteButton.textContent = "Delete";
         readStatus.textContent = "Have read?";
+
         bookDiv.appendChild(title);
         bookDiv.appendChild(author);
         bookDiv.appendChild(pages);
@@ -49,15 +49,15 @@ function displayLibrary() {
         bookDiv.appendChild(divButtons);
         bookDiv.setAttribute("data-id", index);
         bookDiv.classList.add("book");
+
         deleteButton.addEventListener("click", () => {
             myLibrary.splice(bookDiv.dataset.id, 1);
             bookDiv.remove();
-            //console.table(myLibrary);
             displayLibrary();
         });
         readStatus.addEventListener("click", () => {
             book.changeReadStatus();
-            displayLibrary();
+            read.textContent = book.read ? "read" : "not read";
         });
         container.appendChild(bookDiv);
     }
@@ -90,7 +90,6 @@ acceptButton.addEventListener("click", (event) => {
     bookAuthor.value = "";
     bookPages.value = "";
     bookHaveRead.value = "";
-    displayLibrary();
 });
 
 displayLibrary();
