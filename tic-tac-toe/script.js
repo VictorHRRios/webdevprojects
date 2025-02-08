@@ -32,6 +32,29 @@ const displayController = (function () {
     return {getPosition, moveLeft, moveRight, moveUp, moveDown, resetPosition};
 })();
 
+const display = (function () {
+    const container = document.querySelector("div.game-content");
+    const visualBoard = gameBoard.getBoard();
+    const renderGameboard = () => {
+        for (let i = 0; i < visualBoard.length; i++) {
+            for (let j = 0; j < visualBoard[0].length; j++) {
+                const square = document.createElement("div");
+                square.textContent = '🐋';
+                square.setAttribute('row', i);
+                square.setAttribute('col', j);
+                container.appendChild(square);
+            }
+        }
+    }
+    const renderSquare = () => {
+
+    }
+    const changeFocus = () => {
+
+    }
+    return {renderGameboard, changeFocus}
+})();
+
 function createPlayer (name, symbol) {
     return {name, symbol};
 }
@@ -91,7 +114,7 @@ const gameSession = (function () {
     return {getSymbol, changeTurn, checkWinner, getWinner, restartGame};
 })();
 
-
+display.renderGameboard();
 
 window.addEventListener("keydown", function(event) {
     if (event.defaultPrevented) {
