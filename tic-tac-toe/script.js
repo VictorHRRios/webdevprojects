@@ -10,7 +10,14 @@ const gameBoard = (function () {
             return false;
         }
     }
-    return {board, getBoard, updateBoard};
+    const cleanBoard = () => {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                board[i][j] = '';
+            }
+        }
+    };
+    return {board, getBoard, updateBoard, cleanBoard};
 })();
 
 const displayController = (function () {
@@ -21,7 +28,8 @@ const displayController = (function () {
     const moveUp = () => row > 0 ? row-- : row;
     const moveDown = () => row < 2 ? row++ : row;
     const getPosition = () => [row, column];
-    return {getPosition, moveLeft, moveRight, moveUp, moveDown};
+    const resetPosition = () => row = column = 0;
+    return {getPosition, moveLeft, moveRight, moveUp, moveDown, resetPosition};
 })();
 
 function createPlayer (name, symbol) {
@@ -40,7 +48,6 @@ const gameSession = (function () {
             turn = player1;
         } else {
             console.log("Cant change turn! Winner already decided!");
-            turn = '';
         }
     };
     const checkWinner = () => {
@@ -48,9 +55,8 @@ const gameSession = (function () {
         // Check if win by diagonal
         if (board[1][1] == turn.symbol) {
             if ((board[0][2] == turn.symbol && board[2][0] == turn.symbol) || (board[0][0] == turn.symbol && board[2][2] == turn.symbol)) {
-                console.table(board);
-                console.log("We got a winner!");
                 winner = turn.name;
+                console.log(`${winner} is the winner!`);
                 return true;
             }
         }
@@ -68,8 +74,7 @@ const gameSession = (function () {
                     ColumnsinARow++;
                 }
                 if (RowsinARow == 3 || ColumnsinARow == 3) {
-                    console.table(board);
-                    console.log("We got a winner!");
+                    console.log(`${winner} is the winner!`);
                     winner = turn.name;
                     return true;
                 } 
@@ -77,8 +82,13 @@ const gameSession = (function () {
         }
         return false;
     }
+    const restartGame = () => {
+        turn = player1;
+        winner = '';
+    };
+    const getWinner = () => winner;
     const getSymbol = () => turn.symbol;
-    return {getSymbol, changeTurn, checkWinner};
+    return {getSymbol, changeTurn, checkWinner, getWinner, restartGame};
 })();
 
 
@@ -104,10 +114,21 @@ window.addEventListener("keydown", function(event) {
             displayController.moveDown();
             console.log(displayController.getPosition());
             break;
+        case "r":
+            console.log("R KEYY!!");
+            gameBoard.cleanBoard();
+            displayController.resetPosition();
+            gameSession.restartGame();
+            console.table(gameBoard.getBoard());
+            break;
         case "Enter":
-            gameBoard.updateBoard(displayController.getPosition(), gameSession.getSymbol());
-            gameSession.checkWinner();
-            gameSession.changeTurn();
+            if (!gameSession.getWinner()) {
+                gameBoard.updateBoard(displayController.getPosition(), gameSession.getSymbol());
+                gameSession.checkWinner();
+                gameSession.changeTurn();
+            } else {
+                console.log("Winner already decided!");
+            }
             console.table(gameBoard.getBoard());
             break;
         default:
