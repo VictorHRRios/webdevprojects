@@ -15,8 +15,7 @@ Book.prototype.changeReadStatus = function() {
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    const new_book = new Book(title, author, pages, read);
-    myLibrary.push(new_book);
+    myLibrary.push(new Book(title, author, pages, read));
 }
 
 addBookToLibrary("El principito", "some", "123", "read");
@@ -34,6 +33,7 @@ function displayLibrary() {
         const read = document.createElement("div");
         const deleteButton = document.createElement("button");
         const readStatus = document.createElement("button");
+        const divButtons = document.createElement("div");
         title.textContent = book.title;
         author.textContent = book.author;
         pages.textContent = book.pages;
@@ -44,9 +44,11 @@ function displayLibrary() {
         bookDiv.appendChild(author);
         bookDiv.appendChild(pages);
         bookDiv.appendChild(read);
-        bookDiv.appendChild(deleteButton);
-        bookDiv.appendChild(readStatus);
+        divButtons.appendChild(deleteButton);
+        divButtons.appendChild(readStatus);
+        bookDiv.appendChild(divButtons);
         bookDiv.setAttribute("data-id", index);
+        bookDiv.classList.add("book");
         deleteButton.addEventListener("click", () => {
             myLibrary.splice(bookDiv.dataset.id, 1);
             bookDiv.remove();
@@ -63,7 +65,7 @@ function displayLibrary() {
 
 
 const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
+const showButton = document.querySelector(".dialog-button > button");
 const closeButton = document.querySelector("button.cancel");
 
 const bookTitle = document.querySelector('#book-title');

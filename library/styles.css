@@ -1,15 +1,39 @@
 body {
     margin: 0;
+    background-color:#FFF2F2;
 }
 
 .container {
     padding: 2rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    gap: 1rem;
 }
 
 ::backdrop {
     border: 0;
     opacity: 0.70;
+}
+
+.book {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    background-color:  #A9B5DF;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+div.book > div:last-child {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-self: center;
+    gap: 1rem;
+}
+
+div.dialog-button {
+    padding: 1rem;
+}
+
+button {
+    border-radius: 1rem;
 }
