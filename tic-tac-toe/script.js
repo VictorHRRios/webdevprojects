@@ -4,6 +4,9 @@ const gameBoard = (function () {
     const updateBoard = (position, symbol) => {
         if (board[position[0]][position[1]] == "") {
             board[position[0]][position[1]] = symbol;
+            display.renderGameboard();
+            gameSession.checkWinner();
+            gameSession.changeTurn();
             return true;
         } else {
             console.log("Symbol already exists");
@@ -49,12 +52,9 @@ const display = (function () {
                 });
                 square.addEventListener("mousedown", () => {
                     if (!gameSession.getWinner()) {
-                        if (gameBoard.updateBoard([i, j], gameSession.getSymbol())) {
-                            display.renderGameboard();
-                            gameSession.checkWinner();
-                            gameSession.changeTurn();
-                        }
+                        gameBoard.updateBoard([i, j], gameSession.getSymbol());
                     } else {
+                        console.log("Winner already decided!");
                     }
                 });
                 square.setAttribute('row', i);
@@ -123,8 +123,11 @@ const gameSession = (function () {
         return false;
     }
     const restartGame = () => {
+        gameBoard.cleanBoard();
+        displayController.resetPosition();
         turn = player1;
         winner = '';
+        display.renderGameboard();
     };
     const getWinner = () => winner;
     const getSymbol = () => turn.symbol;
@@ -132,15 +135,15 @@ const gameSession = (function () {
     return {getSymbol, changeTurn, checkWinner, getWinner, restartGame, getColor};
 })();
 
+const dialog = document.querySelector('dialog');
+const acceptButton = document.querySelector("input.accept");
+dialog.showModal();
 display.renderGameboard();
 const winnerAnnoncement = document.querySelector('.winner-announcement');
 
 const restartGame = document.querySelector('.restart-game');
 restartGame.addEventListener("click", () =>{
-    gameBoard.cleanBoard();
-    displayController.resetPosition();
     gameSession.restartGame();
-    display.renderGameboard();
     winnerAnnoncement.textContent = '';
 });
 
@@ -168,18 +171,12 @@ window.addEventListener("keydown", function(event) {
             break;
         case "r":
             console.log("R KEYY!!");
-            gameBoard.cleanBoard();
-            displayController.resetPosition();
             gameSession.restartGame();
-            display.renderGameboard();
-            console.table(gameBoard.getBoard());
+            winnerAnnoncement.textContent = '';
             break;
         case "Enter":
             if (!gameSession.getWinner()) {
                 gameBoard.updateBoard(displayController.getPosition(), gameSession.getSymbol());
-                display.renderGameboard();
-                gameSession.checkWinner();
-                gameSession.changeTurn();
             } else {
                 console.log("Winner already decided!");
             }
