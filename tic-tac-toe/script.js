@@ -76,9 +76,14 @@ function createPlayer (name, symbol, color) {
 }
 
 const gameSession = (function () {
-    const player1 = createPlayer("Player 1", "X", " 	#9da363");
-    const player2 = createPlayer("Player 2", "O", " 	#a6849a");
-    let turn = player1;
+    let player1, player2, turn;
+    const startGame = (player1Name, player1Symbol, player2Name, player2Symbol) => {
+        player1 = createPlayer(player1Name, player1Symbol, "#9da363");
+        player2 = createPlayer(player2Name, player2Symbol, "#a6849a");
+        turn = player1;
+    }
+    //const player1 = createPlayer("Player 1", "X", " 	#9da363");
+    //const player2 = createPlayer("Player 2", "O", " 	#a6849a");
     let winner = '';
     const changeTurn = () => {
         if (!winner && turn.symbol === player1.symbol) {
@@ -132,11 +137,13 @@ const gameSession = (function () {
     const getWinner = () => winner;
     const getSymbol = () => turn.symbol;
     const getColor = () => turn.color;
-    return {getSymbol, changeTurn, checkWinner, getWinner, restartGame, getColor};
+    return {getSymbol, changeTurn, checkWinner, getWinner, restartGame, getColor, startGame};
 })();
 
 const dialog = document.querySelector('dialog');
 const acceptButton = document.querySelector("input.accept");
+const startGame = document.querySelector('input.accept');
+
 dialog.showModal();
 display.renderGameboard();
 const winnerAnnoncement = document.querySelector('.winner-announcement');
@@ -146,6 +153,18 @@ restartGame.addEventListener("click", () =>{
     gameSession.restartGame();
     winnerAnnoncement.textContent = '';
 });
+startGame.addEventListener("click", () =>{
+    const player1Name = document.querySelector("#player1");
+    const player2Name = document.querySelector("#player2");
+    const player1Symbol = document.querySelector("#player1-symbol");
+    const player2Symbol = document.querySelector("#player2-symbol");
+    player1Name.value === '' ? player1Name.value = "Lenika" : player1Name.value;
+    player2Name.value === '' ? player2Name.value = "Victor" : player2Name.value;
+    player1Symbol.value === '' ? player1Symbol.value = "🎀" : player1Symbol.value;
+    player2Symbol.value === '' ? player2Symbol.value = "🐋" : player2Symbol.value;
+    gameSession.startGame(player1Name.value, player1Symbol.value, player2Name.value, player2Symbol.value);
+});
+
 
 // To play on keyboard : experimental
 window.addEventListener("keydown", function(event) {
