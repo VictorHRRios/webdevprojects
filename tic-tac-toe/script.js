@@ -17,7 +17,7 @@ const gameBoard = (function () {
             }
         }
     };
-    return {board, getBoard, updateBoard, cleanBoard};
+    return {getBoard, updateBoard, cleanBoard};
 })();
 
 const displayController = (function () {
@@ -40,11 +40,12 @@ const display = (function () {
         for (let i = 0; i < visualBoard.length; i++) {
             for (let j = 0; j < visualBoard[0].length; j++) {
                 const square = document.createElement("div");
+                square.style.backgroundColor = "#fff4e6";
                 square.addEventListener("mouseover", () => {
                     square.style.backgroundColor = gameSession.getColor();
                 });
                 square.addEventListener("mouseleave", () => {
-                    square.style.backgroundColor = "white";
+                    square.style.backgroundColor = "#fff4e6";
                 });
                 square.addEventListener("mousedown", () => {
                     if (!gameSession.getWinner()) {
@@ -75,8 +76,8 @@ function createPlayer (name, symbol, color) {
 }
 
 const gameSession = (function () {
-    const player1 = createPlayer("Player 1", "X", "#67b3b5");
-    const player2 = createPlayer("Player 2", "O", "#f31919");
+    const player1 = createPlayer("Player 1", "X", " 	#9da363");
+    const player2 = createPlayer("Player 2", "O", " 	#a6849a");
     let turn = player1;
     let winner = '';
     const changeTurn = () => {
@@ -94,6 +95,7 @@ const gameSession = (function () {
         if (board[1][1] == turn.symbol) {
             if ((board[0][2] == turn.symbol && board[2][0] == turn.symbol) || (board[0][0] == turn.symbol && board[2][2] == turn.symbol)) {
                 winner = turn.name;
+                winnerAnnoncement.textContent = `${gameSession.getWinner()} has won the game!`;
                 console.log(`${winner} is the winner!`);
                 return true;
             }
@@ -112,8 +114,8 @@ const gameSession = (function () {
                     ColumnsinARow++;
                 }
                 if (RowsinARow == 3 || ColumnsinARow == 3) {
-                    console.log(`${winner} is the winner!`);
                     winner = turn.name;
+                    winnerAnnoncement.textContent = `${gameSession.getWinner()} has won the game!`;
                     return true;
                 } 
             }
@@ -131,7 +133,18 @@ const gameSession = (function () {
 })();
 
 display.renderGameboard();
+const winnerAnnoncement = document.querySelector('.winner-announcement');
 
+const restartGame = document.querySelector('.restart-game');
+restartGame.addEventListener("click", () =>{
+    gameBoard.cleanBoard();
+    displayController.resetPosition();
+    gameSession.restartGame();
+    display.renderGameboard();
+    winnerAnnoncement.textContent = '';
+});
+
+// To play on keyboard : experimental
 window.addEventListener("keydown", function(event) {
     if (event.defaultPrevented) {
         return;
@@ -158,6 +171,7 @@ window.addEventListener("keydown", function(event) {
             gameBoard.cleanBoard();
             displayController.resetPosition();
             gameSession.restartGame();
+            display.renderGameboard();
             console.table(gameBoard.getBoard());
             break;
         case "Enter":
