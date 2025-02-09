@@ -36,32 +36,47 @@ const display = (function () {
     const container = document.querySelector("div.game-content");
     const visualBoard = gameBoard.getBoard();
     const renderGameboard = () => {
+        container.textContent = '';
         for (let i = 0; i < visualBoard.length; i++) {
             for (let j = 0; j < visualBoard[0].length; j++) {
                 const square = document.createElement("div");
-                square.textContent = '🐋';
+                square.addEventListener("mouseover", () => {
+                    square.style.backgroundColor = gameSession.getColor();
+                });
+                square.addEventListener("mouseleave", () => {
+                    square.style.backgroundColor = "white";
+                });
+                square.addEventListener("mousedown", () => {
+                    if (!gameSession.getWinner()) {
+                        if (gameBoard.updateBoard([i, j], gameSession.getSymbol())) {
+                            display.renderGameboard();
+                            gameSession.checkWinner();
+                            gameSession.changeTurn();
+                        }
+                    } else {
+                    }
+                });
                 square.setAttribute('row', i);
                 square.setAttribute('col', j);
+                square.textContent = visualBoard[i][j];
                 container.appendChild(square);
             }
         }
     }
-    const renderSquare = () => {
-
+    const changeFocus = (position) => {
+        const square = document.querySelector(`[data-row='${position[0]}'][data-col='${position[0]}']`);
+        square.style.backgroundcolor = "red";
     }
-    const changeFocus = () => {
-
-    }
-    return {renderGameboard, changeFocus}
+    return {renderGameboard, changeFocus};
 })();
 
-function createPlayer (name, symbol) {
-    return {name, symbol};
+function createPlayer (name, symbol, color) {
+    return {name, symbol, color};
 }
 
 const gameSession = (function () {
-    const player1 = createPlayer("Player 1", "X");
-    const player2 = createPlayer("Player 2", "O");
+    const player1 = createPlayer("Player 1", "X", "#67b3b5");
+    const player2 = createPlayer("Player 2", "O", "#f31919");
     let turn = player1;
     let winner = '';
     const changeTurn = () => {
@@ -111,7 +126,8 @@ const gameSession = (function () {
     };
     const getWinner = () => winner;
     const getSymbol = () => turn.symbol;
-    return {getSymbol, changeTurn, checkWinner, getWinner, restartGame};
+    const getColor = () => turn.color;
+    return {getSymbol, changeTurn, checkWinner, getWinner, restartGame, getColor};
 })();
 
 display.renderGameboard();
@@ -147,6 +163,7 @@ window.addEventListener("keydown", function(event) {
         case "Enter":
             if (!gameSession.getWinner()) {
                 gameBoard.updateBoard(displayController.getPosition(), gameSession.getSymbol());
+                display.renderGameboard();
                 gameSession.checkWinner();
                 gameSession.changeTurn();
             } else {
