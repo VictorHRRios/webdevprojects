@@ -153,7 +153,8 @@ restartGame.addEventListener("click", () =>{
     gameSession.restartGame();
     winnerAnnoncement.textContent = '';
 });
-startGame.addEventListener("click", () =>{
+startGame.addEventListener("click", (event) =>{
+    event.preventDefault();
     const player1Name = document.querySelector("#player1");
     const player2Name = document.querySelector("#player2");
     const player1Symbol = document.querySelector("#player1-symbol");
@@ -163,6 +164,7 @@ startGame.addEventListener("click", () =>{
     player1Symbol.value === '' ? player1Symbol.value = "🎀" : player1Symbol.value;
     player2Symbol.value === '' ? player2Symbol.value = "🐋" : player2Symbol.value;
     gameSession.startGame(player1Name.value, player1Symbol.value, player2Name.value, player2Symbol.value);
+    dialog.close();
 });
 
 
